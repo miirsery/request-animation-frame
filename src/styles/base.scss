@@ -1,0 +1,31 @@
+:root {
+	--color-backgound: #333;
+	--color-grey-1: #777;
+	--color-primary: #87e3e5;
+	--color-white: #fff;
+	--color-black: #111;
+}
+
+h1 {
+	color: var(--color-white);
+}
+
+body {
+	background-color: var(--color-backgound);
+}
+
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+}
+
+[class*="page"] {
+	h1 {
+		text-align: center;
+	}
+}

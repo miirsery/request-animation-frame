@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <h1>FPS counter</h1>
+	<div class="container">
+		<navigation-menu />
 
-    <fps-check />
-  </div>
+		<router-view />
+	</div>
 </template>
-
 <script setup>
-import FpsCheck from './components/FpsCheck.vue';
+import NavigationMenu from "./components/NavigationMenu.vue";
 </script>
