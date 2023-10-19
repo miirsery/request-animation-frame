@@ -5,5 +5,5 @@
 	</div>
 </template>
 <script setup>
-import FpsCheck from "../components/FpsCheck.vue";
+import FpsCheck from "../components/FpsCheck/FpsCheck.vue";
 </script>

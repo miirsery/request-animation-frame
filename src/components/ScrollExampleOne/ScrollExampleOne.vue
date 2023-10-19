@@ -151,4 +151,4 @@ window.addEventListener('scroll', throttle(() => {
 }));
 </script>
 
-<style lang="scss" scoped src="./scroll-one.scss" />
+<style lang="scss" scoped src="./styles.scss" />

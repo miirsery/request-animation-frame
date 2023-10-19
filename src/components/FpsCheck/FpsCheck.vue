@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <button @click="increaseCounter">{{ counter }}</button>
-    {{ time.toFixed(3) }}s
+  <div class="fps-check">
+    <button @click="increaseCounter">Click #{{ counter }}</button>
+      {{ time.toFixed(3) }}s
     <br />
-    {{ fps !== null ? Math.floor(fps) + ' FPS' : 'Calculating FPS...' }}
+	  
+	  <div class="fps-check__text">
+		  {{ fps !== null ? Math.floor(fps) + ' FPS' : 'Calculating FPS...' }}
+	  </div>
   </div>
 </template>
 
@@ -13,6 +16,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 const time = ref(0);
 const fps = ref(null);
 const counter = ref(1);
+
 let init = performance.now();
 let last = init;
 let animationFrame = null;
@@ -50,6 +54,4 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>
-/* Ваши стили здесь */
-</style>
+<style lang="scss" scoped src="./styles.scss" />

@@ -1,0 +1,21 @@
+.fps-check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column-reverse;
+	color: var(--color-white);
+
+	button {
+		margin-top: 12px;
+		background-color: var(--color-primary);
+		border: none;
+		padding: 8px 12px;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: filter 0.15s;
+		
+		&:hover {
+			filter: brightness(70%);
+		}
+	}
+}
