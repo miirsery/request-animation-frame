@@ -41,7 +41,7 @@ onMounted(() =>{
 const setBodyHeight = async () => {
 	if (containerRef.value) {
 		document.body.style.height = `${
-			containerRef.value.getBoundingClientRect().height
+			containerRef.value.getBoundingClientRect().height + props.offset
 		}px`;
 	}
 }
