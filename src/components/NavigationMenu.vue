@@ -2,6 +2,7 @@
 	<div class="navigation-menu">
 		<router-link class="navigation-menu__link" to="/">FPS Check</router-link>
 		<router-link class="navigation-menu__link" to="/scroll-1">Scroll example 1</router-link>
+		<router-link class="navigation-menu__link" to="/hexagon-example">Hexagon example</router-link>
 	</div>
 </template>
 

@@ -12,6 +12,11 @@ export const router = createRouter({
       path: '/scroll-1',
       name: 'ScrollExampleOne',
       component: () => import('./pages/ScrollExampleOne.vue')
+    },
+    {
+      path: '/hexagon-example',
+      name: 'HexagonExample',
+      component: () => import('./pages/HexagonPage.vue')
     }
   ]
 })

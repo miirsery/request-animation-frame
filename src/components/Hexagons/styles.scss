@@ -1,0 +1,65 @@
+body {
+	background-color: #2b0944;
+}
+
+#addHexagon {
+	background-color: #2b0944; /* Dark Vaporwave Purple */
+	border: 2px solid #01a7a8; /* Neon Teal */
+	padding: 10px 20px;
+	font-size: 1em;
+	color: #fd6f97; /* Neon Pink */
+	border-radius: 8px;
+	transition: all 0.3s ease-out;
+	cursor: pointer;
+	text-shadow: 1px 1px 2px #2b0944;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+#addHexagon:hover {
+	background-color: #fd6f97; /* Neon Pink */
+	color: #2b0944; /* Dark Vaporwave Purple */
+	border-color: #fd6f97;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#addHexagon:active {
+	transform: translateY(2px);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main {
+	display: flex;
+	--s: 100px; /* size  */
+	--m: 7px; /* margin */
+	--f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
+}
+
+.container {
+	font-size: 0; /*disable white space between inline block element */
+}
+
+:deep(.hexagon) {
+	width: var(--s);
+	margin: var(--m);
+	height: calc(var(--s) * 1.1547);
+	display: inline-block;
+	font-size: initial;
+	clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+	background: #ff6ec7;
+	margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+}
+
+:deep(.hexagon:nth-child(odd)) {
+	background: #4dfeff;
+}
+
+.container::before {
+	content: "";
+	width: calc(var(--s) / 2 + var(--m));
+	float: left;
+	height: 120%;
+	shape-outside: repeating-linear-gradient(
+			#0000 0 calc(var(--f) - 3px),
+			#000 0 var(--f)
+	);
+}
