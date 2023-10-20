@@ -7,8 +7,16 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch} from "vue";
+import {nextTick, onMounted, ref, watch} from "vue";
 import { useWindowSize } from "../../../hooks/index.js";
+
+const props = defineProps({
+	offset: {
+		type: Number,
+		default: 0,
+		required: false,
+	}
+})
 
 const { screen } = useWindowSize()
 
@@ -26,16 +34,16 @@ watch(() => screen, () => {
 }, { deep: true })
 
 onMounted(() => {
-	setBodyHeight()
-	
-	requestAnimationFrame(() => smoothScrollingHandler());
+	nextTick(() => {
+		setBodyHeight()
+		
+		requestAnimationFrame(() => smoothScrollingHandler());
+	})
 })
 
 const setBodyHeight = () => {
-	const TOP_OFFSET = 400
-	
 	document.body.style.height = `${
-		containerRef.value.getBoundingClientRect().height + TOP_OFFSET
+		containerRef.value.getBoundingClientRect().height + props.offset
 	}px`;
 }
 
