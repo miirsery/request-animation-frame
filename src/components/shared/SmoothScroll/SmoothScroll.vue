@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {nextTick, onMounted, onUpdated, ref, watch} from "vue";
+import {nextTick, onMounted, onUpdated, ref, useSlots, watch} from "vue";
 import { useWindowSize } from "../../../hooks/index.js";
 
 const props = defineProps({
@@ -17,6 +17,8 @@ const props = defineProps({
 		required: false,
 	}
 })
+
+const slots = useSlots()
 
 const { screen } = useWindowSize()
 
@@ -38,15 +40,6 @@ watch(() => screen, () => {
 onMounted(() =>{
 	nextTick(() => {
 		setBodyHeight()
-		
-		requestAnimationFrame(() => smoothScrollingHandler());
-	})
-})
-
-onUpdated(() => {
-	nextTick(() => {
-		setBodyHeight()
-		
 		requestAnimationFrame(() => smoothScrollingHandler());
 	})
 })
@@ -54,9 +47,11 @@ onUpdated(() => {
 const setBodyHeight = () => {
 	if (containerRef.value) {
 		nextTick(() => {
-			document.body.style.height = `${
-				containerRef.value.getBoundingClientRect().height + props.offset
-			}px`;
+			if (slots?.default) {
+				document.body.style.height = `${
+					containerRef.value.getBoundingClientRect().height + props.offset
+				}px`;
+			}
 		})
 	}
 }
