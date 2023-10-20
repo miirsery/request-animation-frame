@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {nextTick, onMounted, onUpdated, ref, useSlots, watch} from "vue";
+import {computed, nextTick, onMounted, onUpdated, ref, useSlots, watch} from "vue";
 import { useWindowSize } from "../../../hooks/index.js";
 
 const props = defineProps({
@@ -18,12 +18,11 @@ const props = defineProps({
 	}
 })
 
-const slots = useSlots()
-
 const { screen } = useWindowSize()
 
 const scrollRef = ref()
 const containerRef = ref()
+const height = ref()
 
 const SCROLL_SETTINGS = {
 	ease: 0.1,
@@ -32,8 +31,12 @@ const SCROLL_SETTINGS = {
 	rounded: 0,
 }
 
+watch(() => containerRef?.value?.getBoundingClientRect().height, (value) => {
+	height.value = value
+	setBodyHeight()
+})
+
 watch(() => screen, () => {
-	console.log(screen)
 	setBodyHeight()
 }, { deep: true })
 
@@ -44,14 +47,12 @@ onMounted(() =>{
 	})
 })
 
-const setBodyHeight = () => {
+const setBodyHeight = async () => {
 	if (containerRef.value) {
-		nextTick(() => {
-			if (slots?.default) {
-				document.body.style.height = `${
-					containerRef.value.getBoundingClientRect().height + props.offset
-				}px`;
-			}
+		await nextTick(() => {
+			document.body.style.height = `${
+				height.value
+			}px`;
 		})
 	}
 }
