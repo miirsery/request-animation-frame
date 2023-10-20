@@ -42,9 +42,13 @@ onMounted(() => {
 })
 
 const setBodyHeight = () => {
-	document.body.style.height = `${
-		containerRef.value.getBoundingClientRect().height + props.offset
-	}px`;
+	if (containerRef.value) {
+		nextTick(() => {
+			document.body.style.height = `${
+				containerRef.value.getBoundingClientRect().height + props.offset
+			}px`;
+		})
+	}
 }
 
 const smoothScrollingHandler = () => {
