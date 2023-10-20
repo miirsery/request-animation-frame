@@ -32,21 +32,17 @@ const SCROLL_SETTINGS = {
 }
 
 onMounted(() =>{
-	nextTick(() => {
-		setTimeout(() => {
-			setBodyHeight()
-			requestAnimationFrame(() => smoothScrollingHandler());
-		}, 1000)
-	})
+	setTimeout(() => {
+		setBodyHeight()
+		requestAnimationFrame(() => smoothScrollingHandler());
+	}, 1000)
 })
 
 const setBodyHeight = async () => {
 	if (containerRef.value) {
-		await nextTick(() => {
-			document.body.style.height = `${
-				height.value
-			}px`;
-		})
+		document.body.style.height = `${
+			containerRef.value.getBoundingClientRect().height
+		}px`;
 	}
 }
 
