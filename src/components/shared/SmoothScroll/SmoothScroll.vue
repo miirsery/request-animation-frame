@@ -1,5 +1,5 @@
 <template>
-	<div class="smooth-scroll">
+	<div ref="scrollRef" class="smooth-scroll">
 		<div ref="containerRef">
 			<slot />
 		</div>
@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {nextTick, onMounted, ref, watch} from "vue";
+import {nextTick, onMounted, onUpdated, ref, watch} from "vue";
 import { useWindowSize } from "../../../hooks/index.js";
 
 const props = defineProps({
@@ -20,6 +20,7 @@ const props = defineProps({
 
 const { screen } = useWindowSize()
 
+const scrollRef = ref()
 const containerRef = ref()
 
 const SCROLL_SETTINGS = {
@@ -30,10 +31,19 @@ const SCROLL_SETTINGS = {
 }
 
 watch(() => screen, () => {
+	console.log(screen)
 	setBodyHeight()
 }, { deep: true })
 
-onMounted(() => {
+onMounted(() =>{
+	nextTick(() => {
+		setBodyHeight()
+		
+		requestAnimationFrame(() => smoothScrollingHandler());
+	})
+})
+
+onUpdated(() => {
 	nextTick(() => {
 		setBodyHeight()
 		
@@ -52,6 +62,16 @@ const setBodyHeight = () => {
 }
 
 const smoothScrollingHandler = () => {
+	if (!containerRef.value) return
+	
+	if (scrollRef.value) {
+		if (window.scrollY <= 10) {
+			scrollRef.value.style.position = 'static'
+		} else {
+			scrollRef.value.style.position = 'fixed'
+		}
+	}
+	
 	SCROLL_SETTINGS.current = window.scrollY;
 	SCROLL_SETTINGS.previous += (SCROLL_SETTINGS.current - SCROLL_SETTINGS.previous) * SCROLL_SETTINGS.ease;
 	SCROLL_SETTINGS.rounded = Math.round(SCROLL_SETTINGS.previous * 100) / 100;
