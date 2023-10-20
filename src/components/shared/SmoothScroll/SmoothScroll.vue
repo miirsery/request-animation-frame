@@ -31,15 +31,6 @@ const SCROLL_SETTINGS = {
 	rounded: 0,
 }
 
-watch(() => containerRef?.value?.getBoundingClientRect().height, (value) => {
-	height.value = value
-	setBodyHeight()
-})
-
-watch(() => screen, () => {
-	setBodyHeight()
-}, { deep: true })
-
 onMounted(() =>{
 	nextTick(() => {
 		setTimeout(() => {
