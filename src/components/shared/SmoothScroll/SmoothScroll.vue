@@ -42,8 +42,10 @@ watch(() => screen, () => {
 
 onMounted(() =>{
 	nextTick(() => {
-		setBodyHeight()
-		requestAnimationFrame(() => smoothScrollingHandler());
+		setTimeout(() => {
+			setBodyHeight()
+			requestAnimationFrame(() => smoothScrollingHandler());
+		}, 1000)
 	})
 })
 
