@@ -15,6 +15,11 @@ const props = defineProps({
 		type: Number,
 		default: 0,
 		required: false,
+	},
+	height: {
+		type: Number,
+		required: false,
+		default: 0,
 	}
 })
 
@@ -22,7 +27,7 @@ const { screen } = useWindowSize()
 
 const scrollRef = ref()
 const containerRef = ref()
-const height = ref()
+const localHeight = ref()
 
 const SCROLL_SETTINGS = {
 	ease: 0.1,
@@ -33,14 +38,14 @@ const SCROLL_SETTINGS = {
 
 onMounted(() =>{
 	setTimeout(() => {
-		setBodyHeight()
+		setBodyLocalHeight()
 		requestAnimationFrame(() => smoothScrollingHandler());
 	}, 1000)
 })
 
-const setBodyHeight = async () => {
+const setBodyLocalHeight = async () => {
 	if (containerRef.value) {
-		document.body.style.height = `${
+		document.body.style.height = `${props.height + props.offset}px` ?? `${
 			containerRef.value.getBoundingClientRect().height + props.offset
 		}px`;
 	}

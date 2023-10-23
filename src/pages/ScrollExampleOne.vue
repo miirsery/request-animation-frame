@@ -1,5 +1,5 @@
 <template>
-	<smooth-scroll :offset="200">
+	<smooth-scroll :offset="200" :height="4400">
 		<div class="scroll-example-one-page">
 			<h1>Scroll 1</h1>
 			
