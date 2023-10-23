@@ -1,1 +1,1 @@
-export { useWindowSize } from './useSmoothScroll.js'
+export { useScreen } from './useScreen.js'

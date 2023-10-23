@@ -8,7 +8,7 @@
 
 <script setup>
 import {computed, nextTick, onMounted, onUpdated, ref, useSlots, watch} from "vue";
-import { useWindowSize } from "../../../hooks/index.js";
+import { useScreen } from "../../../hooks/index.js";
 
 const props = defineProps({
 	offset: {
@@ -23,7 +23,7 @@ const props = defineProps({
 	}
 })
 
-const { screen } = useWindowSize()
+const { screen } = useScreen()
 
 const scrollRef = ref()
 const containerRef = ref()
