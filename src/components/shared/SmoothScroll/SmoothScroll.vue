@@ -8,7 +8,7 @@
 
 <script setup>
 import {computed, nextTick, onMounted, onUpdated, ref, useSlots, watch} from "vue";
-import { useScreen } from "../../../hooks/index.js";
+import { useScreen } from "../../../shared/lib/hooks/index.js";
 
 const props = defineProps({
 	offset: {
@@ -53,7 +53,7 @@ const setBodyLocalHeight = async () => {
 
 const smoothScrollingHandler = () => {
 	if (!containerRef.value) return
-	
+
 	if (scrollRef.value) {
 		if (window.scrollY <= 10) {
 			scrollRef.value.style.position = 'static'
@@ -61,13 +61,13 @@ const smoothScrollingHandler = () => {
 			scrollRef.value.style.position = 'fixed'
 		}
 	}
-	
+
 	SCROLL_SETTINGS.current = window.scrollY;
 	SCROLL_SETTINGS.previous += (SCROLL_SETTINGS.current - SCROLL_SETTINGS.previous) * SCROLL_SETTINGS.ease;
 	SCROLL_SETTINGS.rounded = Math.round(SCROLL_SETTINGS.previous * 100) / 100;
-	
+
 	containerRef.value.style.transform = `translateY(-${SCROLL_SETTINGS.previous}px)`;
-	
+
 	// Recursive call
 	requestAnimationFrame(() => smoothScrollingHandler());
 };
